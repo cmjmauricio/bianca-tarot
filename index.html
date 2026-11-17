@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bianca Rothschild · Tarot & Astrologia</title>
+<meta name="description" content="Bianca Rothschild, a gata mística: leituras de tarot para carreira, amor e decisões, mapa astral e consultas de astrologia.">
+<meta property="og:title" content="Bianca Rothschild · Tarot & Astrologia">
+<meta property="og:description" content="Mystic Career Consulting — tarot, astrologia e conselhos felinos para os seus caminhos.">
+<meta property="og:image" content="bianca.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔮</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#120a24; --night2:#1d1038; --violet:#3a1d6e; --lilac:#b48cff; --pink:#ff8fc8;
+  --gold:#f2c75c; --gold2:#ffe39a; --cream:#fbf3e4; --text:#efe6ff; --muted:#b9a8d9;
+  --card:rgba(255,255,255,.06); --line:rgba(242,199,92,.28);
+  --r:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden}
+main{overflow-x:clip}
+body{
+  font-family:"Nunito",system-ui,sans-serif;color:var(--text);line-height:1.6;
+  background:radial-gradient(1200px 700px at 80% -10%,#4b2591 0%,transparent 60%),
+             radial-gradient(900px 600px at -10% 40%,#2b1460 0%,transparent 60%),
+             linear-gradient(180deg,var(--night) 0%,var(--night2) 55%,var(--night) 100%);
+  background-attachment:fixed;min-height:100vh;overflow-x:hidden;
+}
+#sky{position:fixed;inset:0;z-index:0;pointer-events:none}
+main,header,footer{position:relative;z-index:1}
+a{color:inherit}
+h1,h2,h3{font-family:"Cinzel",serif;font-weight:700;letter-spacing:.02em;line-height:1.15}
+.serif{font-family:"Cormorant Garamond",serif}
+.wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+
+/* ---------- Header ---------- */
+header{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  background:rgba(18,10,36,.72);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;height:68px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand .moon{width:36px;height:36px;border-radius:50%;background:radial-gradient(circle at 35% 35%,var(--gold2),var(--gold) 60%,#b98a1d);
+  box-shadow:0 0 22px rgba(242,199,92,.55);position:relative;flex:none}
+.brand .moon::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--night);transform:translate(9px,-5px) scale(.88)}
+.brand b{font-family:"Cinzel",serif;font-size:1.05rem;letter-spacing:.06em}
+.brand small{display:block;font-size:.68rem;color:var(--gold);letter-spacing:.22em;text-transform:uppercase;margin-top:-2px}
+.tabs{display:flex;gap:4px}
+.tabs a{text-decoration:none;padding:9px 14px;border-radius:999px;font-weight:600;font-size:.93rem;color:var(--muted);transition:.25s}
+.tabs a:hover{color:var(--text);background:rgba(255,255,255,.06)}
+.tabs a.on{color:var(--night);background:linear-gradient(135deg,var(--gold2),var(--gold))}
+.menu{display:none;background:none;border:1px solid var(--line);color:var(--gold);border-radius:12px;padding:8px 12px;font-size:1.1rem;cursor:pointer}
+
+/* ---------- Pages ---------- */
+.page{display:none;animation:fadeUp .7s ease both}
+.page.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+section{padding:72px 0}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--gold);text-transform:uppercase;letter-spacing:.24em;font-size:.75rem;font-weight:700}
+.eyebrow::before{content:"✦"}
+.title{font-size:clamp(1.8rem,4vw,2.7rem);margin:10px 0 12px}
+.lead{color:var(--muted);font-size:1.08rem;max-width:640px}
+.center{text-align:center}.center .lead{margin:0 auto}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;text-decoration:none;font:700 1rem "Nunito",sans-serif;
+  padding:14px 26px;border-radius:999px;transition:transform .25s,box-shadow .25s}
+.btn.gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#2a1650;box-shadow:0 10px 30px rgba(242,199,92,.28)}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.25)}
+.btn:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(242,199,92,.38)}
+
+/* ---------- Hero ---------- */
+.hero{padding:40px 0 0;min-height:calc(100vh - 68px);display:flex;align-items:center}
+.hero .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(2.4rem,6vw,4.4rem);margin:14px 0 6px;
+  background:linear-gradient(120deg,#e8d4ff 0%,var(--lilac) 40%,var(--pink) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .tag{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:clamp(1.4rem,2.8vw,1.9rem);color:var(--gold2);margin-bottom:16px}
+.hero p.lead{margin-bottom:28px}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px}
+.stats{display:flex;gap:28px;margin-top:34px;flex-wrap:wrap}
+.stats div b{display:block;font-family:"Cinzel",serif;font-size:1.6rem;color:var(--gold2)}
+.stats div span{font-size:.85rem;color:var(--muted)}
+.portrait{position:relative;aspect-ratio:1/1.05;max-width:520px;width:100%;justify-self:center}
+.portrait .halo{position:absolute;inset:6% 4% 10%;border-radius:50%;
+  background:radial-gradient(circle,rgba(180,140,255,.55) 0%,rgba(120,60,220,.25) 45%,transparent 70%);filter:blur(6px);animation:pulse 6s ease-in-out infinite}
+.portrait .ring{position:absolute;inset:2% 0 6%;border-radius:50%;border:1px dashed rgba(242,199,92,.45);animation:spin 60s linear infinite}
+.portrait .ring::before,.portrait .ring::after{content:"☾";position:absolute;color:var(--gold);font-size:1.4rem;top:-14px;left:50%}
+.portrait .ring::after{content:"✶";top:auto;bottom:-14px}
+.portrait img{position:absolute;left:0;right:0;bottom:0;width:100%;
+  -webkit-mask-image:radial-gradient(ellipse 62% 70% at 52% 42%,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse 62% 70% at 52% 42%,#000 62%,transparent 100%);
+  filter:drop-shadow(0 20px 40px rgba(0,0,0,.45));animation:float 7s ease-in-out infinite}
+.badge{position:absolute;background:rgba(29,16,56,.85);border:1px solid var(--line);border-radius:16px;padding:10px 14px;font-size:.85rem;
+  backdrop-filter:blur(8px);box-shadow:0 10px 30px rgba(0,0,0,.35);animation:float 6s ease-in-out infinite}
+.badge b{color:var(--gold2)}
+.badge.b1{top:12%;right:-2%}.badge.b2{bottom:22%;left:-4%;animation-delay:-3s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{opacity:.8;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+
+/* ---------- Marquee ---------- */
+.marquee{border-block:1px solid var(--line);background:rgba(242,199,92,.05);overflow:hidden;padding:14px 0}
+.marquee .track{display:flex;gap:46px;width:max-content;animation:roll 40s linear infinite;font-family:"Cinzel",serif;color:var(--gold2);letter-spacing:.12em;font-size:.95rem}
+@keyframes roll{to{transform:translateX(-50%)}}
+
+/* ---------- Cards ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;margin-top:40px}
+.svc{position:relative;background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:var(--r);padding:28px 24px 24px;
+  transition:transform .35s,border-color .35s,background .35s;overflow:hidden}
+.svc::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;
+  background:linear-gradient(140deg,rgba(242,199,92,.6),transparent 40%,transparent 60%,rgba(180,140,255,.6));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:.35s}
+.svc:hover{transform:translateY(-8px);background:rgba(255,255,255,.09)}
+.svc:hover::before{opacity:1}
+.svc .ico{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;font-size:1.7rem;margin-bottom:16px;
+  background:linear-gradient(135deg,rgba(242,199,92,.22),rgba(180,140,255,.22));border:1px solid var(--line)}
+.svc h3{font-size:1.15rem;margin-bottom:8px}
+.svc p{color:var(--muted);font-size:.95rem}
+.svc ul{list-style:none;margin:14px 0 18px;font-size:.9rem}
+.svc li{padding:3px 0 3px 22px;position:relative}
+.svc li::before{content:"🐾";position:absolute;left:0;font-size:.75rem;top:6px}
+.svc .foot{display:flex;justify-content:space-between;align-items:center;border-top:1px dashed rgba(255,255,255,.12);padding-top:14px}
+.price{font-family:"Cinzel",serif;color:var(--gold2);font-size:1.15rem}
+.price small{display:block;font-family:"Nunito";font-size:.72rem;color:var(--muted);letter-spacing:.05em}
+.mini{font-size:.85rem;font-weight:700;color:var(--gold);text-decoration:none;cursor:pointer;background:none;border:0}
+.mini:hover{text-decoration:underline}
+.svc.star{background:linear-gradient(160deg,rgba(242,199,92,.16),rgba(180,140,255,.10));border-color:var(--line)}
+.ribbon{position:absolute;top:16px;right:-34px;transform:rotate(38deg);background:var(--gold);color:#2a1650;font-size:.68rem;font-weight:800;
+  letter-spacing:.12em;padding:4px 40px;text-transform:uppercase}
+.cat-ears{position:absolute;top:-1px;left:24px;display:flex;gap:16px}
+
+/* ---------- Feature (carreira) ---------- */
+.feature{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:center}
+.spread{position:relative;height:340px}
+.tcard{position:absolute;width:150px;height:240px;border-radius:14px;
+  background:linear-gradient(160deg,#2c1658,#170b33);border:2px solid var(--gold);box-shadow:0 18px 40px rgba(0,0,0,.45);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:14px;text-align:center;transition:transform .5s}
+.tcard::before{content:"";position:absolute;inset:7px;border:1px solid rgba(242,199,92,.4);border-radius:9px}
+.tcard .n{font-family:"Cinzel",serif;color:var(--gold);font-size:.8rem;letter-spacing:.2em}
+.tcard .s{font-size:3rem}
+.tcard .t{font-family:"Cinzel",serif;font-size:.72rem;color:var(--cream);line-height:1.3;position:relative}
+.spread .tcard:nth-child(1){left:6%;top:40px;transform:rotate(-12deg)}
+.spread .tcard:nth-child(2){left:calc(50% - 75px);top:10px;z-index:2}
+.spread .tcard:nth-child(3){right:6%;top:40px;transform:rotate(12deg)}
+.spread:hover .tcard:nth-child(1){transform:rotate(-18deg) translateX(-14px)}
+.spread:hover .tcard:nth-child(3){transform:rotate(18deg) translateX(14px)}
+.spread:hover .tcard:nth-child(2){transform:translateY(-12px)}
+.checks{list-style:none;margin:20px 0 26px;display:grid;gap:10px}
+.checks li{display:flex;gap:12px;align-items:flex-start}
+.checks li span{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:rgba(242,199,92,.16);color:var(--gold2);font-size:.85rem}
+
+/* ---------- Carta do dia ---------- */
+.oracle{background:linear-gradient(180deg,rgba(58,29,110,.35),rgba(18,10,36,.2));border-block:1px solid rgba(255,255,255,.06)}
+.deck{display:flex;justify-content:center;gap:18px;margin:36px 0 10px;flex-wrap:wrap;perspective:1200px}
+.flip{width:150px;height:240px;cursor:pointer;position:relative;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.flip:hover{transform:translateY(-10px)}
+.flip.open{transform:rotateY(180deg)}
+.flip .face{position:absolute;inset:0;border-radius:14px;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:2px solid var(--gold);
+  box-shadow:0 18px 40px rgba(0,0,0,.45);overflow:hidden}
+.flip .back{background:
+  radial-gradient(circle at 50% 50%,rgba(242,199,92,.25) 0 18%,transparent 19%),
+  repeating-conic-gradient(from 0deg,#2c1658 0 10deg,#22104a 10deg 20deg);display:grid;place-items:center}
+.flip .back::after{content:"🐈‍⬛";font-size:2.4rem;filter:drop-shadow(0 0 8px rgba(242,199,92,.7))}
+.flip .front{transform:rotateY(180deg);background:linear-gradient(160deg,#fbf3e4,#efdcb5);color:#2a1650;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;gap:6px}
+.flip .front .s{font-size:3rem}
+.flip .front .n{font-family:"Cinzel",serif;font-size:.75rem;letter-spacing:.2em;color:#8a5a00}
+.flip .front .t{font-family:"Cinzel",serif;font-weight:700;font-size:.92rem}
+.reading{max-width:640px;margin:24px auto 0;text-align:center;min-height:120px}
+.reading .msg{font-family:"Cormorant Garamond",serif;font-size:1.45rem;font-style:italic;color:var(--cream)}
+.reading .who{color:var(--gold);font-size:.85rem;margin-top:8px;letter-spacing:.12em;text-transform:uppercase}
+
+/* ---------- Testimonials ---------- */
+.tgrid{columns:3 290px;column-gap:22px;margin-top:40px}
+.quote{break-inside:avoid;margin-bottom:22px;background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:var(--r);padding:24px;position:relative}
+.quote::before{content:"“";position:absolute;top:-6px;right:18px;font-family:"Cormorant Garamond",serif;font-size:5rem;color:rgba(242,199,92,.25);line-height:1}
+.quote .stars{color:var(--gold);letter-spacing:3px;font-size:.9rem}
+.quote p{margin:10px 0 16px;font-size:.98rem}
+.person{display:flex;align-items:center;gap:12px}
+.avatar{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:1.3rem;flex:none;
+  background:linear-gradient(135deg,var(--violet),#6a3fc0);border:1px solid var(--line)}
+.person b{display:block;font-size:.95rem}
+.person span{font-size:.8rem;color:var(--muted)}
+.pill{display:inline-block;font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:999px;background:rgba(180,140,255,.18);color:var(--lilac);margin-bottom:4px}
+
+/* ---------- Astro ---------- */
+.zodiac{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:34px}
+.zbtn{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px 6px;cursor:pointer;color:var(--text);
+  font:600 .82rem "Nunito",sans-serif;transition:.25s;display:flex;flex-direction:column;align-items:center;gap:4px}
+.zbtn i{font-style:normal;font-size:1.6rem;color:var(--gold2)}
+.zbtn:hover,.zbtn.on{background:linear-gradient(135deg,rgba(242,199,92,.25),rgba(180,140,255,.2));border-color:var(--gold);transform:translateY(-4px)}
+.horo{margin-top:22px;background:linear-gradient(135deg,rgba(58,29,110,.5),rgba(29,16,56,.6));border:1px solid var(--line);border-radius:var(--r);
+  padding:26px 28px;display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center}
+.horo .glyph{font-size:4rem;color:var(--gold2);width:96px;height:96px;border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle,rgba(242,199,92,.2),transparent 70%);border:1px solid var(--line)}
+.horo h3{font-size:1.3rem}
+.horo .dates{color:var(--muted);font-size:.85rem;margin-bottom:6px}
+.horo .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.horo .chips span{font-size:.78rem;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1)}
+.wheel-wrap{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+.wheel{width:100%;max-width:420px;justify-self:center;animation:spin 120s linear infinite}
+
+/* ---------- Steps / FAQ / contato ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:40px;counter-reset:s}
+.step{padding:22px;border-radius:var(--r);background:var(--card);border:1px solid rgba(255,255,255,.08);position:relative}
+.step::before{counter-increment:s;content:counter(s);font-family:"Cinzel",serif;font-size:2.4rem;color:rgba(242,199,92,.35);position:absolute;right:16px;top:8px}
+.step h3{font-size:1rem;margin:8px 0 6px}
+.step p{color:var(--muted);font-size:.9rem}
+.faq{max-width:780px;margin:34px auto 0}
+details{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;margin-bottom:12px;padding:4px 20px}
+summary{cursor:pointer;list-style:none;padding:14px 0;font-weight:700;display:flex;justify-content:space-between;gap:12px}
+summary::after{content:"✦";color:var(--gold);transition:.3s}
+details[open] summary::after{transform:rotate(135deg)}
+details p{color:var(--muted);padding-bottom:16px}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start}
+form{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:26px;display:grid;gap:14px}
+label{font-size:.85rem;font-weight:700;color:var(--gold2);display:grid;gap:6px}
+input,select,textarea{font:inherit;color:var(--text);background:rgba(18,10,36,.7);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:12px 14px;width:100%}
+select option{background:var(--night2)}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);border-color:transparent}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.note{font-size:.8rem;color:var(--muted)}
+.ok{display:none;padding:14px;border-radius:12px;background:rgba(242,199,92,.14);border:1px solid var(--line);color:var(--gold2)}
+.channels{display:grid;gap:12px;margin-top:24px}
+.channels div{display:flex;gap:12px;align-items:center;padding:14px 16px;border-radius:16px;background:var(--card);border:1px solid rgba(255,255,255,.08)}
+.channels div i{font-style:normal;font-size:1.4rem}
+
+/* ---------- CTA band / footer ---------- */
+.band{margin:0 20px;border-radius:30px;padding:46px 30px;text-align:center;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#5b2db0,#2a1458 55%,#7a2f8f)}
+.band h2{font-size:clamp(1.5rem,3.4vw,2.3rem);margin-bottom:10px}
+.band p{color:#e7dcff;margin-bottom:22px}
+.band .paw{position:absolute;font-size:5rem;opacity:.08}
+footer{padding:46px 0 30px;color:var(--muted);font-size:.85rem;text-align:center}
+footer .sig{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:1.3rem;color:var(--gold2);margin-bottom:6px}
+
+.paws{position:fixed;inset:0;pointer-events:none;z-index:0}
+.paws span{position:absolute;opacity:.05;font-size:1.6rem}
+
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- Responsive ---------- */
+@media (max-width:920px){
+  .hero .grid,.feature,.wheel-wrap,.contact{grid-template-columns:1fr}
+  .portrait{max-width:420px;order:-1}
+  .hero{min-height:auto;padding-top:20px}
+  .steps{grid-template-columns:1fr 1fr}
+  .zodiac{grid-template-columns:repeat(4,1fr)}
+}
+@media (max-width:760px){
+  .menu{display:block}
+  .tabs{position:absolute;top:68px;left:0;right:0;flex-direction:column;padding:12px 16px 18px;background:rgba(18,10,36,.97);
+    border-bottom:1px solid var(--line);display:none}
+  .tabs.open{display:flex}
+  .tabs a{padding:12px 16px}
+  section{padding:54px 0}
+  .wrap{padding:0 16px}
+  .zodiac{grid-template-columns:repeat(3,1fr)}
+  .horo{grid-template-columns:1fr;text-align:center}
+  .horo .glyph{margin:0 auto}
+  .horo .chips{justify-content:center}
+  .steps{grid-template-columns:1fr}
+  .row2{grid-template-columns:1fr}
+  .badge{font-size:.75rem}
+  .badge.b1{right:0}.badge.b2{left:0}
+  .flip,.tcard{width:120px;height:196px}
+  .flip .front .s,.tcard .s{font-size:2.3rem}
+  .spread{height:280px}
+  .spread .tcard:nth-child(2){left:calc(50% - 60px)}
+  .band{margin:0 12px;padding:36px 20px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<canvas id="sky"></canvas>
+<div class="paws" id="paws"></div>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#inicio" data-go="inicio">
+      <span class="moon"></span>
+      <span><b>Bianca Rothschild</b><small>Tarot · Astrologia</small></span>
+    </a>
+    <button class="menu" id="menuBtn" aria-label="Abrir menu">☰</button>
+    <nav class="tabs" id="tabs">
+      <a href="#inicio" data-go="inicio">Início</a>
+      <a href="#tarot" data-go="tarot">Tarot</a>
+      <a href="#astrologia" data-go="astrologia">Astrologia</a>
+      <a href="#depoimentos" data-go="depoimentos">Depoimentos</a>
+      <a href="#agendar" data-go="agendar">Agendar</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- ================= INÍCIO ================= -->
+<div class="page" id="p-inicio">
+  <section class="hero">
+    <div class="wrap grid">
+      <div>
+        <span class="eyebrow">Mystic Career Consulting</span>
+        <h1>Bianca Rothschild</h1>
+        <div class="tag">A gata que lê as cartas — e o seu futuro.</div>
+        <p class="lead">Leituras de tarot e astrologia com sete vidas de experiência. Carreira, amor, decisões difíceis ou aquela dúvida que não te deixa dormir: Bianca senta no teclado, ajeita o chapéu e conta o que os astros (e os bigodes) estão dizendo.</p>
+        <div class="ctas">
+          <a class="btn gold" href="#agendar" data-go="agendar">🔮 Agendar minha leitura</a>
+          <a class="btn ghost" href="#tarot" data-go="tarot">Ver serviços</a>
+        </div>
+        <div class="stats">
+          <div><b>2.700+</b><span>leituras realizadas</span></div>
+          <div><b>4,9 ★</b><span>avaliação média</span></div>
+          <div><b>7 vidas</b><span>de experiência</span></div>
+        </div>
+      </div>
+      <div class="portrait">
+        <div class="halo"></div><div class="ring"></div>
+        <img src="bianca.png" alt="Bianca, gata laranja com chapéu de bruxa estrelado, sentada diante de um teclado">
+        <div class="badge b1">✨ <b>Agenda aberta</b> esta semana</div>
+        <div class="badge b2">🐾 Especialista em <b>carreira</b></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee"><div class="track" id="marq"></div></div>
+
+  <section>
+    <div class="wrap center reveal">
+      <span class="eyebrow">Leituras em destaque</span>
+      <h2 class="title">Para onde seu caminho aponta?</h2>
+      <p class="lead">As consultas mais procuradas. Escolha a sua — ou deixe a Bianca escolher pela pata.</p>
+    </div>
+    <div class="wrap cards" id="destaques"></div>
+  </section>
+
+  <section>
+    <div class="wrap feature reveal">
+      <div class="spread">
+        <div class="tcard"><span class="n">VIII</span><span class="s">🦁</span><span class="t">A Força</span></div>
+        <div class="tcard"><span class="n">XIX</span><span class="s">☀️</span><span class="t">O Sol</span></div>
+        <div class="tcard"><span class="n">X</span><span class="s">🎡</span><span class="t">Roda da Fortuna</span></div>
+      </div>
+      <div>
+        <span class="eyebrow">Especialidade da casa</span>
+        <h2 class="title">Leitura de Carreira & Emprego</h2>
+        <p class="lead">Foi aqui que tudo começou: Bianca passou anos sentada em teclados de escritório observando chefes, reuniões e planilhas. Hoje ela traduz esse faro em leituras que ajudam você a decidir o próximo passo profissional.</p>
+        <ul class="checks">
+          <li><span>✦</span><div><b>Vale a pena trocar de emprego?</b> Tiragem comparando o caminho atual e o novo.</div></li>
+          <li><span>✦</span><div><b>Entrevista e promoção:</b> energias, obstáculos e o melhor momento para agir.</div></li>
+          <li><span>✦</span><div><b>Vocação e transição:</b> cartas + Meio do Céu do seu mapa astral.</div></li>
+          <li><span>✦</span><div><b>Negócio próprio:</b> tiragem de 12 meses para o seu projeto.</div></li>
+        </ul>
+        <a class="btn gold" href="#agendar" data-go="agendar" data-svc="Carreira & Emprego">Quero minha leitura de carreira</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="oracle">
+    <div class="wrap center reveal">
+      <span class="eyebrow">Experimente agora</span>
+      <h2 class="title">Sua carta do dia</h2>
+      <p class="lead">Respire fundo, pense numa pergunta e escolha uma das cartas. Bianca já embaralhou (e derrubou duas da mesa).</p>
+      <div class="deck" id="deck"></div>
+      <div class="reading" id="reading"><p class="note">Toque numa carta para revelar.</p></div>
+      <button class="btn ghost" id="reshuffle" style="display:none;margin-top:10px">🔄 Embaralhar de novo</button>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap center reveal">
+      <span class="eyebrow">Como funciona</span>
+      <h2 class="title">Do agendamento à resposta</h2>
+    </div>
+    <div class="wrap steps reveal">
+      <div class="step"><div>📅</div><h3>Escolha a leitura</h3><p>Tarot, astrologia ou um combo. Na dúvida, Bianca indica.</p></div>
+      <div class="step"><div>💬</div><h3>Conte sua pergunta</h3><p>Pelo formulário ou WhatsApp. Para astrologia, envie data, hora e local de nascimento.</p></div>
+      <div class="step"><div>🃏</div><h3>A tiragem</h3><p>Ao vivo por vídeo ou em áudio gravado, com foto das cartas.</p></div>
+      <div class="step"><div>📜</div><h3>Seu resumo</h3><p>Você recebe um PDF com as cartas, a interpretação e os próximos passos.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap center reveal">
+      <span class="eyebrow">Quem já consultou</span>
+      <h2 class="title">Miados de satisfação</h2>
+    </div>
+    <div class="wrap tgrid" id="tPreview"></div>
+    <div class="wrap center"><a class="btn ghost" href="#depoimentos" data-go="depoimentos">Ver todos os depoimentos</a></div>
+  </section>
+</div>
+
+<!-- ================= TAROT ================= -->
+<div class="page" id="p-tarot">
+  <section>
+    <div class="wrap center reveal">
+      <span class="eyebrow">Tarot</span>
+      <h2 class="title">Leituras de Tarot</h2>
+      <p class="lead">Tarô de Marselha e Rider-Waite, lidos com intuição, carinho e um leve desdém felino por respostas vagas. Todas as leituras incluem resumo escrito.</p>
+    </div>
+    <div class="wrap cards" id="tarotCards"></div>
+  </section>
+  <section class="oracle">
+    <div class="wrap center reveal">
+      <span class="eyebrow">Perguntas frequentes</span>
+      <h2 class="title">Antes de embaralhar</h2>
+    </div>
+    <div class="wrap faq" id="faq"></div>
+  </section>
+</div>
+
+<!-- ================= ASTROLOGIA ================= -->
+<div class="page" id="p-astrologia">
+  <section>
+    <div class="wrap wheel-wrap reveal">
+      <div>
+        <span class="eyebrow">Astrologia</span>
+        <h2 class="title">O céu do dia em que você nasceu</h2>
+        <p class="lead">O mapa astral é a fotografia do céu no seu nascimento. Bianca observa planetas, casas e aspectos como observa um passarinho na janela: com atenção total. Daí saem respostas sobre personalidade, vocação, relacionamentos e ciclos.</p>
+        <div class="ctas" style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+          <a class="btn gold" href="#agendar" data-go="agendar" data-svc="Mapa Astral Completo">Quero meu mapa astral</a>
+          <a class="btn ghost" href="#horoscopo">Horóscopo felino ↓</a>
+        </div>
+      </div>
+      <svg class="wheel" viewBox="0 0 400 400" id="wheel" aria-hidden="true"></svg>
+    </div>
+  </section>
+  <section>
+    <div class="wrap center reveal">
+      <span class="eyebrow">Consultas</span>
+      <h2 class="title">Serviços de Astrologia</h2>
+    </div>
+    <div class="wrap cards" id="astroCards"></div>
+  </section>
+  <section class="oracle" id="horoscopo">
+    <div class="wrap center reveal">
+      <span class="eyebrow">Horóscopo felino da semana</span>
+      <h2 class="title">Qual é o seu signo?</h2>
+      <p class="lead">Previsões escritas pela própria Bianca, entre uma soneca e outra. Para leitura séria, agende uma consulta 😉</p>
+    </div>
+    <div class="wrap">
+      <div class="zodiac" id="zodiac"></div>
+      <div class="horo" id="horo"></div>
+    </div>
+  </section>
+  <section>
+    <div class="wrap center reveal">
+      <span class="eyebrow">Combo</span>
+      <h2 class="title">Tarot + Astrologia</h2>
+      <p class="lead">O mapa mostra o terreno; as cartas mostram o momento. Juntos, a leitura fica completa.</p>
+    </div>
+    <div class="wrap cards" id="comboCards"></div>
+  </section>
+</div>
+
+<!-- ================= DEPOIMENTOS ================= -->
+<div class="page" id="p-depoimentos">
+  <section>
+    <div class="wrap center reveal">
+      <span class="eyebrow">Depoimentos</span>
+      <h2 class="title">O que dizem de Bianca</h2>
+      <p class="lead">Humanos e felinos, todos atendidos com o mesmo carinho (e a mesma cara de quem já sabia a resposta).</p>
+    </div>
+    <div class="wrap center" style="margin-top:22px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap" id="tFilter"></div>
+    <div class="wrap tgrid" id="tAll"></div>
+  </section>
+</div>
+
+<!-- ================= AGENDAR ================= -->
+<div class="page" id="p-agendar">
+  <section>
+    <div class="wrap contact reveal">
+      <div>
+        <span class="eyebrow">Agendamento</span>
+        <h2 class="title">Marque sua consulta</h2>
+        <p class="lead">Preencha o formulário: a mensagem já sai pronta para o WhatsApp da Bianca. Ela responde entre uma soneca e outra — normalmente em até 24 horas.</p>
+        <div class="channels">
+          <div><i>💬</i><span><b>WhatsApp</b><br><span class="note">Atendimento de seg. a sáb., 9h às 20h</span></span></div>
+          <div><i>📸</i><span><b>Instagram</b><br><span class="note">@bianca.gatamistica</span></span></div>
+          <div><i>🖥️</i><span><b>Consultas on-line</b><br><span class="note">Vídeo, áudio ou texto — para todo o Brasil</span></span></div>
+        </div>
+      </div>
+      <form id="form">
+        <label>Seu nome<input name="nome" required placeholder="Como posso te chamar?"></label>
+        <label>Tipo de leitura<select name="svc" id="svcSel"></select></label>
+        <div class="row2">
+          <label>Formato<select name="fmt"><option>Vídeo ao vivo</option><option>Áudio gravado</option><option>Texto (PDF)</option></select></label>
+          <label>Melhor período<select name="per"><option>Manhã</option><option>Tarde</option><option>Noite</option></select></label>
+        </div>
+        <label>Data de nascimento <span class="note" style="font-weight:400">(para astrologia)</span><input name="nasc" placeholder="dd/mm/aaaa, hora e cidade"></label>
+        <label>Sua pergunta<textarea name="q" rows="4" placeholder="Ex.: devo aceitar a proposta de emprego nova?"></textarea></label>
+        <button class="btn gold" type="submit">✨ Enviar pelo WhatsApp</button>
+        <div class="ok" id="ok"></div>
+        <p class="note">Leituras de tarot e astrologia são ferramentas de autoconhecimento e entretenimento e não substituem orientação médica, jurídica, psicológica ou financeira.</p>
+      </form>
+    </div>
+  </section>
+</div>
+
+<div class="band reveal">
+  <span class="paw" style="left:4%;top:8%">🐾</span><span class="paw" style="right:6%;bottom:4%">🐾</span>
+  <h2>As cartas já estão na mesa.</h2>
+  <p>Falta só você fazer a pergunta.</p>
+  <a class="btn gold" href="#agendar" data-go="agendar">🔮 Agendar leitura</a>
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="sig">Bianca Rothschild · Mystic Career Consulting</div>
+    <p>Tarot · Astrologia · Conselhos felinos &nbsp;·&nbsp; © <span id="yr"></span></p>
+    <p style="margin-top:6px">Atendimento para fins de autoconhecimento e entretenimento.</p>
+  </div>
+</footer>
+
+<script>
+/* ===== Configuração: número do WhatsApp com DDI e DDD, só dígitos (ex.: "5511999999999") ===== */
+const WHATSAPP = "";
+
+/* ---------------- Dados ---------------- */
+const TAROT = [
+  {ico:"💼",t:"Carreira & Emprego",d:"Troca de emprego, entrevistas, promoção, transição e negócio próprio.",
+   li:["Tiragem de 7 cartas","Comparação entre caminhos","Melhor momento para agir"],p:"R$ 120",dur:"50 min",star:1,tag:"Mais pedida"},
+  {ico:"💞",t:"Leitura Amorosa",d:"O que o outro sente, se vale insistir, se vem amor novo por aí.",
+   li:["Cruz do relacionamento","Sentimentos e intenções","Conselho das cartas"],p:"R$ 110",dur:"45 min",star:1,tag:"Favorita"},
+  {ico:"⚖️",t:"Decisão Difícil",d:"Dois (ou três) caminhos e nenhuma certeza? A tiragem das escolhas ilumina cada opção.",
+   li:["Até 3 caminhos","Prós, riscos e tendências","Resposta objetiva"],p:"R$ 95",dur:"40 min"},
+  {ico:"👑",t:"Mesa Real (Grand Tableau)",d:"A leitura mais completa: todas as áreas da vida em uma única mesa.",
+   li:["36 cartas na mesa","Amor, trabalho, saúde e família","Gravação em áudio"],p:"R$ 220",dur:"90 min"},
+  {ico:"🌙",t:"Pergunta Rápida",d:"Uma pergunta, três cartas, resposta direta — sem enrolação (gatos não enrolam).",
+   li:["1 pergunta","Tiragem de 3 cartas","Resposta por áudio em até 24h"],p:"R$ 45",dur:"áudio"},
+  {ico:"🗓️",t:"Ano Novo Astral",d:"Uma carta para cada mês dos próximos 12, com o tema e o conselho de cada um.",
+   li:["12 cartas + carta-síntese","Calendário em PDF","Ideal no aniversário"],p:"R$ 160",dur:"60 min"},
+  {ico:"🏡",t:"Família & Amizades",d:"Conflitos em casa, parcerias, amizades que mudaram de energia.",
+   li:["Tiragem dos laços","Como agir na situação","Conselho de reconciliação"],p:"R$ 100",dur:"45 min"},
+  {ico:"🐈",t:"Leitura para Pets",d:"Seu bichinho anda estranho? Bianca conversa de felino para felino (e também atende cães).",
+   li:["Humor e energia do pet","Adaptação a mudanças","Feita com muito ronrom"],p:"R$ 70",dur:"30 min",tag:"Só aqui"}
+];
+const ASTRO = [
+  {ico:"🌌",t:"Mapa Astral Completo",d:"Sol, Lua, Ascendente, planetas, casas e aspectos: quem você é e para onde vai.",
+   li:["Mapa desenhado em PDF","Personalidade e talentos","Consulta por vídeo"],p:"R$ 250",dur:"90 min",star:1,tag:"Essencial"},
+  {ico:"🧭",t:"Mapa de Carreira & Vocação",d:"Meio do Céu, Casa 10, Casa 6 e Saturno para entender sua vocação e seu tempo.",
+   li:["Talentos profissionais","Ambientes ideais","Ciclos de crescimento"],p:"R$ 190",dur:"60 min",star:1,tag:"Assinatura"},
+  {ico:"💫",t:"Sinastria (Compatibilidade)",d:"Os dois mapas lado a lado: atração, desafios e o potencial do casal.",
+   li:["Dois mapas comparados","Pontos de harmonia e atrito","Conselhos para a relação"],p:"R$ 230",dur:"75 min"},
+  {ico:"🎂",t:"Revolução Solar",d:"O mapa do seu novo ano pessoal, de aniversário a aniversário.",
+   li:["Temas do ano","Meses-chave","Ótimo de presente"],p:"R$ 170",dur:"60 min"},
+  {ico:"🪐",t:"Trânsitos & Previsões",d:"O que os planetas estão ativando no seu mapa nos próximos 6 meses.",
+   li:["Saturno, Júpiter e Plutão","Janelas de oportunidade","Retornos e fases"],p:"R$ 150",dur:"50 min"},
+  {ico:"🐾",t:"Mapa Astral do Pet",d:"Com data de nascimento (ou de adoção), descubra o signo e o temperamento do seu bichinho.",
+   li:["Personalidade do pet","Compatibilidade com o tutor","Certificado fofo em PDF"],p:"R$ 80",dur:"PDF"}
+];
+const COMBO = [
+  {ico:"🔮",t:"Combo Carreira Total",d:"Mapa de Carreira + Leitura de Carreira & Emprego. A dupla preferida de quem quer mudar.",
+   li:["Mapa vocacional","Tiragem de 7 cartas","Plano de próximos passos"],p:"R$ 270",old:"R$ 310",star:1,tag:"Economize"},
+  {ico:"❤️‍🔥",t:"Combo Coração",d:"Sinastria + Leitura Amorosa: o mapa do casal e o momento da relação.",
+   li:["Dois mapas comparados","Cruz do relacionamento","Conselho final"],p:"R$ 290",old:"R$ 340"},
+  {ico:"🌟",t:"Combo Aniversário",d:"Revolução Solar + Ano Novo Astral: seu novo ciclo, mês a mês.",
+   li:["Mapa do ano","12 cartas mensais","Calendário em PDF"],p:"R$ 280",old:"R$ 330"}
+];
+const DEPO = [
+  {n:"Juliana M.",w:"Analista de marketing · SP",a:"👩🏻‍💼",c:"Carreira",s:"Estava há meses em dúvida se aceitava uma proposta nova. A Bianca tirou A Roda da Fortuna e O Sol e disse: 'vai, mas negocia o salário'. Negociei, aceitei, e estou feliz como gato em caixa de papelão."},
+  {n:"Rafael T.",w:"Engenheiro · Curitiba",a:"👨🏽‍🔧",c:"Carreira",s:"Fiz o Combo Carreira Total. O mapa mostrou coisas que eu sabia mas não admitia. Seis meses depois abri minha consultoria. Recomendo de olhos fechados (como a Bianca dormindo)."},
+  {n:"Camila e Bruno",w:"Casal · Belo Horizonte",a:"💑",c:"Amor",s:"A sinastria foi certeira! Entendemos por que brigávamos sempre pelos mesmos motivos. Hoje rimos disso. A Bianca é um amor de gata."},
+  {n:"Mingau",w:"Gato de apartamento, 4 anos",a:"🐱",c:"Pets",s:"Miau. Miau miau, prrrr. Miau! (Tradução da tutora: depois da leitura ele parou de derrubar copos da mesa. Quase todos.)"},
+  {n:"Patrícia L.",w:"Professora · Recife",a:"👩🏾‍🏫",c:"Amor",s:"Pedi uma leitura amorosa achando que ia ouvir o que eu queria. Ouvi o que eu precisava. Doeu um pouquinho, mas me libertou. Gratidão, Bianca!"},
+  {n:"Fernando A.",w:"Desenvolvedor · Floripa",a:"👨🏻‍💻",c:"Carreira",s:"Leitura objetiva, sem papo vago. Ela previu uma mudança de equipe que aconteceu três semanas depois. E sim, ela sentou no teclado durante a chamada."},
+  {n:"Luana P.",w:"Designer · Porto Alegre",a:"👩🏼‍🎨",c:"Astrologia",s:"Meu mapa astral virou meu livro de cabeceira. O PDF é lindo e a explicação foi super didática, até para quem não entende nada de astrologia."},
+  {n:"Dona Cida",w:"Aposentada · Campinas",a:"👵🏼",c:"Tarot",s:"Fiz a Mesa Real no meu aniversário de 70 anos. Que experiência! A gatinha é muito séria no trabalho, mas me fez rir o tempo todo."},
+  {n:"Thor",w:"Golden retriever, 2 anos",a:"🐶",c:"Pets",s:"Au! (A tutora explica: o Thor estava ansioso com a mudança de casa. A leitura deu dicas simples que funcionaram. A Bianca atende cachorros sem preconceito, que gata evoluída.)"},
+  {n:"Marcos V.",w:"Empreendedor · Salvador",a:"👨🏿‍💼",c:"Astrologia",s:"A Revolução Solar mostrou que meu ano seria de expansão em agosto. Lancei o produto em agosto. Coincidência? Não para a Bianca."},
+  {n:"Beatriz S.",w:"Estudante · Brasília",a:"👩🏻‍🎓",c:"Tarot",s:"Usei a Pergunta Rápida antes de escolher o curso. Resposta em áudio no mesmo dia, clara e acolhedora. Melhor R$ 45 que já gastei."},
+  {n:"Renata e Pipoca",w:"Tutora e gata · Rio de Janeiro",a:"🐈",c:"Pets",s:"Fizemos o mapa astral da Pipoca: leonina com ascendente em escorpião. Explica TUDO. O certificado está emoldurado na sala."}
+];
+const ARCANOS = [
+  ["0","O Louco","🎒","Pule do muro sem medo: gatos sempre caem de pé. Um começo novo pede coragem, não certeza."],
+  ["I","O Mago","🪄","Você já tem as ferramentas na mesa. Hoje é dia de usar o que sabe, sem esperar permissão."],
+  ["II","A Sacerdotisa","🌙","Nem tudo precisa ser dito. Observe em silêncio, como um gato na janela: a resposta vai aparecer."],
+  ["III","A Imperatriz","🌸","Cuide do que você plantou. Conforto, beleza e um cochilo ao sol também são produtividade."],
+  ["IV","O Imperador","🏛️","Organize o território. Regras claras e rotina firme trazem a segurança que você procura."],
+  ["V","O Hierofante","📜","Ouça quem já trilhou esse caminho. Um conselho experiente vale mais que dez buscas na internet."],
+  ["VI","Os Enamorados","💞","Uma escolha do coração se aproxima. Escolha o que te faz ronronar, não o que agrada aos outros."],
+  ["VII","O Carro","🏎️","Avance! Foco no destino e pulso firme nas rédeas. A vitória vem para quem não se distrai com o laser."],
+  ["VIII","A Força","🦁","Sua força é a doçura. Domine a situação com paciência — até leões respeitam um gato calmo."],
+  ["IX","O Eremita","🏮","Hora de se recolher e pensar. Uma caixa de papelão e silêncio podem trazer grandes respostas."],
+  ["X","Roda da Fortuna","🎡","A sorte está girando a seu favor. Fique atento às oportunidades que aparecem de repente."],
+  ["XI","A Justiça","⚖️","O que é seu chega. Seja honesto nas contas e nas palavras: o equilíbrio volta."],
+  ["XII","O Enforcado","🙃","Mude o ângulo. Às vezes ver o mundo de cabeça para baixo (como um gato no sofá) revela a saída."],
+  ["XIII","A Morte","🦋","Um ciclo termina para outro começar. Solte o que já não cabe — como pelo de troca de estação."],
+  ["XIV","A Temperança","🫖","Calma e medida. Misture as coisas aos poucos; pressa agora só derruba o copo da mesa."],
+  ["XV","O Diabo","🔗","Cuidado com o que te prende por hábito. Nem todo petisco faz bem, por mais gostoso que seja."],
+  ["XVI","A Torre","⚡","Algo vai mudar de repente. Assuste-se um pouco, depois perceba que abriu espaço para algo melhor."],
+  ["XVII","A Estrela","⭐","Esperança renovada. Você está no caminho certo; continue brilhando, mesmo que ninguém esteja vendo."],
+  ["XVIII","A Lua","🌕","Nem tudo é o que parece. Confie na intuição e não tome decisões grandes no escuro."],
+  ["XIX","O Sol","☀️","Dia de luz! Sucesso, alegria e clareza. Deite no raio de sol e aproveite: você merece."],
+  ["XX","O Julgamento","📯","Um chamado importante. Reveja o passado com carinho e diga sim ao que te convoca."],
+  ["XXI","O Mundo","🌍","Conclusão e conquista. Um capítulo se fecha com sucesso — comemore antes de começar o próximo."]
+];
+const SIGNOS = [
+  ["♈","Áries","21/03 – 19/04","Fogo","Sua energia está de gato às 3 da manhã: corra atrás do projeto novo, mas não derrube tudo pelo caminho.","Carreira em alta","Cor: vermelho"],
+  ["♉","Touro","20/04 – 20/05","Terra","Semana de conforto e boas refeições. No trabalho, a constância rende um reconhecimento merecido.","Finanças estáveis","Cor: verde-musgo"],
+  ["♊","Gêmeos","21/05 – 20/06","Ar","Conversas trazem oportunidades. Responda aquela mensagem: ela pode virar convite profissional.","Comunicação","Cor: amarelo"],
+  ["♋","Câncer","21/06 – 22/07","Água","Casa e família no centro. Um cantinho aconchegante recarrega você para o que vem por aí.","Lar e afeto","Cor: prata"],
+  ["♌","Leão","23/07 – 22/08","Fogo","Os holofotes são seus (como sempre). Mostre seu trabalho: alguém importante está prestando atenção.","Visibilidade","Cor: dourado"],
+  ["♍","Virgem","23/08 – 22/09","Terra","Organizar a rotina traz paz. Cuidado com o perfeccionismo: nem todo pelo precisa estar no lugar.","Saúde e rotina","Cor: bege"],
+  ["♎","Libra","23/09 – 22/10","Ar","Parcerias favorecidas. Um acordo justo se desenha — negocie com charme e firmeza.","Parcerias","Cor: rosa"],
+  ["♏","Escorpião","23/10 – 21/11","Água","Intuição afiada como garra. Confie no que sente sobre aquela pessoa ou proposta.","Transformação","Cor: vinho"],
+  ["♐","Sagitário","22/11 – 21/12","Fogo","Vontade de explorar! Um curso ou uma viagem curta abre horizontes inesperados.","Expansão","Cor: roxo"],
+  ["♑","Capricórnio","22/12 – 19/01","Terra","Seus esforços estão sendo notados. Uma conversa sobre promoção pode acontecer em breve.","Carreira em foco","Cor: grafite"],
+  ["♒","Aquário","20/01 – 18/02","Ar","Ideias fora da caixa (de papelão) ganham força. Compartilhe com o grupo certo.","Inovação","Cor: azul-elétrico"],
+  ["♓","Peixes","19/02 – 20/03","Água","Sonhos estão dando recados. Anote ao acordar — e aproveite uma soneca extra sem culpa.","Intuição","Cor: lilás"]
+];
+const FAQ = [
+  ["As leituras são on-line?","Sim! Por vídeo ao vivo, áudio gravado ou texto em PDF. Atendimento para todo o Brasil."],
+  ["Preciso acreditar em tarot para funcionar?","Não. Pense no tarot como uma ferramenta de reflexão: as cartas organizam perguntas e ajudam você a enxergar caminhos."],
+  ["A Bianca prevê o futuro com certeza?","Nenhum gato (ou humano) sério promete isso. As cartas mostram tendências e conselhos; quem decide o caminho é você."],
+  ["Quanto tempo leva para receber o resumo?","O PDF com as cartas e a interpretação chega em até 48 horas depois da consulta."],
+  ["Posso perguntar sobre outra pessoa?","Pode, sempre com respeito. A leitura foca em como a situação afeta você e no que está ao seu alcance."],
+  ["Como funciona o pagamento?","Pix ou cartão, combinado no agendamento. Reagendamento gratuito com 24 horas de antecedência."]
+];
+
+/* ---------------- Render ---------------- */
+const $ = s => document.querySelector(s);
+function card(o){
+  return `<article class="svc ${o.star?'star':''} reveal">${o.tag?`<span class="ribbon">${o.tag}</span>`:''}
+    <div class="ico">${o.ico}</div><h3>${o.t}</h3><p>${o.d}</p>
+    <ul>${o.li.map(x=>`<li>${x}</li>`).join('')}</ul>
+    <div class="foot"><div class="price">${o.old?`<small style="text-decoration:line-through">${o.old}</small>`:''}${o.p}<small>${o.dur||'combo'}</small></div>
+    <button class="mini" data-go="agendar" data-svc="${o.t}">Agendar →</button></div></article>`;
+}
+$('#destaques').innerHTML = [TAROT[0],TAROT[1],ASTRO[0],TAROT[2]].map(card).join('');
+$('#tarotCards').innerHTML = TAROT.map(card).join('');
+$('#astroCards').innerHTML = ASTRO.map(card).join('');
+$('#comboCards').innerHTML = COMBO.map(card).join('');
+$('#faq').innerHTML = FAQ.map(f=>`<details><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join('');
+
+function quote(d){
+  return `<div class="quote reveal"><span class="pill">${d.c}</span><div class="stars">★★★★★</div><p>${d.s}</p>
+    <div class="person"><div class="avatar">${d.a}</div><div><b>${d.n}</b><span>${d.w}</span></div></div></div>`;
+}
+$('#tPreview').innerHTML = [DEPO[0],DEPO[3],DEPO[2]].map(quote).join('');
+const cats = ["Todos",...new Set(DEPO.map(d=>d.c))];
+$('#tFilter').innerHTML = cats.map((c,i)=>`<button class="zbtn ${i?'':'on'}" style="flex-direction:row;padding:8px 16px" data-c="${c}">${c}</button>`).join('');
+function renderDepo(c){ $('#tAll').innerHTML = DEPO.filter(d=>c==="Todos"||d.c===c).map(quote).join(''); observe(); }
+$('#tFilter').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  document.querySelectorAll('#tFilter button').forEach(x=>x.classList.toggle('on',x===b)); renderDepo(b.dataset.c);});
+
+const svcs=[...TAROT,...ASTRO,...COMBO].map(o=>o.t);
+$('#svcSel').innerHTML = ['Ainda não sei — quero uma indicação',...svcs].map(s=>`<option>${s}</option>`).join('');
+
+const words=["Tarot","✦","Carreira","☾","Amor","✶","Mapa Astral","✦","Sinastria","☾","Revolução Solar","✶","Leitura para Pets","✦","Conselhos felinos","☾"];
+$('#marq').innerHTML = [...words,...words].map(w=>`<span>${w}</span>`).join('');
+
+/* Zodiac wheel */
+(function(){
+  const g=$('#wheel'); let h=`<defs><radialGradient id="wg"><stop offset="0" stop-color="#f2c75c" stop-opacity=".25"/><stop offset="1" stop-color="#f2c75c" stop-opacity="0"/></radialGradient></defs>
+  <circle cx="200" cy="200" r="195" fill="url(#wg)"/>
+  <circle cx="200" cy="200" r="190" fill="none" stroke="#f2c75c" stroke-opacity=".7"/>
+  <circle cx="200" cy="200" r="150" fill="none" stroke="#f2c75c" stroke-opacity=".5"/>
+  <circle cx="200" cy="200" r="70" fill="none" stroke="#b48cff" stroke-opacity=".5" stroke-dasharray="3 5"/>`;
+  SIGNOS.forEach((s,i)=>{const a=(i*30-90)*Math.PI/180, a2=((i*30+15)-90)*Math.PI/180;
+    h+=`<line x1="${200+150*Math.cos(a)}" y1="${200+150*Math.sin(a)}" x2="${200+190*Math.cos(a)}" y2="${200+190*Math.sin(a)}" stroke="#f2c75c" stroke-opacity=".5"/>`;
+    h+=`<text x="${200+170*Math.cos(a2)}" y="${200+170*Math.sin(a2)}" fill="#ffe39a" font-size="20" text-anchor="middle" dominant-baseline="central">${s[0]}&#xFE0E;</text>`;});
+  for(let i=0;i<9;i++){const a=Math.random()*6.28, r=80+Math.random()*60; h+=`<circle cx="${200+r*Math.cos(a)}" cy="${200+r*Math.sin(a)}" r="${2+Math.random()*3}" fill="${['#ffe39a','#b48cff','#ff8fc8'][i%3]}"/>`;}
+  h+=`<text x="200" y="210" font-size="44" text-anchor="middle">🐈</text>`;
+  g.innerHTML=h;
+})();
+
+/* Horóscopo */
+function horo(i){const s=SIGNOS[i];
+  document.querySelectorAll('.zbtn[data-z]').forEach((b,j)=>b.classList.toggle('on',j===i));
+  $('#horo').innerHTML=`<div class="glyph">${s[0]}&#xFE0E;</div><div><h3>${s[1]}</h3><div class="dates">${s[2]} · Elemento ${s[3]}</div>
+  <p>${s[4]}</p><div class="chips"><span>✦ ${s[5]}</span><span>🎨 ${s[6].replace('Cor: ','')}</span><span>🐾 Conselho felino: tire uma soneca estratégica</span></div></div>`;}
+$('#zodiac').innerHTML = SIGNOS.map((s,i)=>`<button class="zbtn" data-z="${i}"><i>${s[0]}&#xFE0E;</i>${s[1]}</button>`).join('');
+$('#zodiac').addEventListener('click',e=>{const b=e.target.closest('[data-z]'); if(b) horo(+b.dataset.z);});
+(function(){const d=new Date(),m=d.getMonth()+1,day=d.getDate();
+  const lim=[[3,21],[4,20],[5,21],[6,21],[7,23],[8,23],[9,23],[10,23],[11,22],[12,22],[1,20],[2,19]];
+  let k=11; for(let i=0;i<12;i++){const [mm,dd]=lim[i],[nm,nd]=lim[(i+1)%12];
+    if((m===mm&&day>=dd)||(m===nm&&day<nd)){k=i;break;}} horo(k);})();
+
+/* Carta do dia */
+function deal(){
+  const pick=[...ARCANOS].sort(()=>Math.random()-.5).slice(0,3);
+  $('#deck').innerHTML = pick.map((c,i)=>`<div class="flip" data-i="${i}"><div class="face back"></div>
+    <div class="face front"><span class="n">${c[0]}</span><span class="s">${c[2]}</span><span class="t">${c[1]}</span></div></div>`).join('');
+  $('#reading').innerHTML='<p class="note">Toque numa carta para revelar.</p>';
+  $('#reshuffle').style.display='none';
+  $('#deck').onclick=e=>{const f=e.target.closest('.flip'); if(!f||$('#deck .open'))return;
+    f.classList.add('open'); const c=pick[+f.dataset.i];
+    document.querySelectorAll('#deck .flip:not(.open)').forEach(x=>x.style.opacity=.35);
+    setTimeout(()=>{$('#reading').innerHTML=`<div class="msg">“${c[3]}”</div><div class="who">${c[0]} · ${c[1]} — conselho da Bianca</div>`;
+      $('#reshuffle').style.display='inline-flex';},500);};
+}
+$('#reshuffle').onclick=deal; deal();
+
+/* ---------------- Navegação por abas ---------------- */
+const pages=['inicio','tarot','astrologia','depoimentos','agendar'];
+function show(id,svc){
+  if(!pages.includes(id)) id='inicio';
+  pages.forEach(p=>$('#p-'+p).classList.toggle('on',p===id));
+  document.querySelectorAll('.tabs a').forEach(a=>a.classList.toggle('on',a.dataset.go===id));
+  $('#tabs').classList.remove('open');
+  if(svc){ $('#svcSel').value=svc; }
+  window.scrollTo({top:0,behavior:'instant'in window?'instant':'auto'});
+  if(id==='depoimentos') renderDepo(document.querySelector('#tFilter .on').dataset.c);
+  observe();
+}
+document.addEventListener('click',e=>{
+  const a=e.target.closest('[data-go]'); if(!a) return;
+  e.preventDefault(); const id=a.dataset.go;
+  if(location.hash!=='#'+id) history.pushState(null,'','#'+id);
+  show(id,a.dataset.svc);
+});
+window.addEventListener('popstate',()=>show(location.hash.slice(1)));
+window.addEventListener('hashchange',()=>{const h=location.hash.slice(1); if(pages.includes(h)&&!$('#p-'+h).classList.contains('on')) show(h);});
+$('#menuBtn').onclick=()=>$('#tabs').classList.toggle('open');
+document.querySelector('a[href="#horoscopo"]').addEventListener('click',e=>{e.preventDefault();$('#horoscopo').scrollIntoView({behavior:'smooth'});});
+
+/* Reveal on scroll */
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}}),{threshold:.01,rootMargin:'0px 0px -40px 0px'});
+function observe(){document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));}
+
+/* Formulário → WhatsApp */
+$('#form').addEventListener('submit',e=>{
+  e.preventDefault(); const f=new FormData(e.target);
+  const txt=`Olá, Bianca! 🔮\nMeu nome é ${f.get('nome')}.\nLeitura: ${f.get('svc')}\nFormato: ${f.get('fmt')} · Período: ${f.get('per')}`+
+    (f.get('nasc')?`\nNascimento: ${f.get('nasc')}`:'')+(f.get('q')?`\nMinha pergunta: ${f.get('q')}`:'');
+  const ok=$('#ok'); ok.style.display='block';
+  if(WHATSAPP){ window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(txt)}`,'_blank'); ok.textContent='✨ Abrimos o WhatsApp com sua mensagem pronta. É só enviar!'; }
+  else { ok.textContent='✨ Pedido recebido! Em breve o WhatsApp da Bianca estará disponível aqui. Por enquanto, chame no Instagram @bianca.gatamistica.'; }
+});
+
+/* Céu estrelado */
+(function(){
+  const c=$('#sky'),x=c.getContext('2d'); let W,H,st=[],sh=[];
+  function rs(){W=c.width=innerWidth*devicePixelRatio;H=c.height=innerHeight*devicePixelRatio;c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';
+    st=Array.from({length:Math.round(innerWidth*innerHeight/5000)},()=>({x:Math.random()*W,y:Math.random()*H,r:(Math.random()*1.3+.3)*devicePixelRatio,p:Math.random()*6.28,s:.5+Math.random()*1.5}));}
+  rs(); addEventListener('resize',rs);
+  const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function fr(t){x.clearRect(0,0,W,H);
+    for(const s of st){const a=.35+.65*Math.abs(Math.sin(s.p+t/1000*s.s)); x.globalAlpha=a; x.fillStyle=s.r>1.5*devicePixelRatio?'#ffe39a':'#fff';
+      x.beginPath();x.arc(s.x,s.y,s.r,0,6.28);x.fill();}
+    if(Math.random()<.004&&sh.length<2) sh.push({x:Math.random()*W*.7,y:Math.random()*H*.4,l:0});
+    sh=sh.filter(s=>s.l<1); for(const s of sh){s.l+=.012; const len=160*devicePixelRatio, px=s.x+s.l*W*.35, py=s.y+s.l*H*.2;
+      const g=x.createLinearGradient(px,py,px-len,py-len*.55); g.addColorStop(0,'rgba(255,227,154,'+(1-s.l)+')'); g.addColorStop(1,'rgba(255,227,154,0)');
+      x.globalAlpha=1; x.strokeStyle=g; x.lineWidth=2*devicePixelRatio; x.beginPath(); x.moveTo(px,py); x.lineTo(px-len,py-len*.55); x.stroke();}
+    x.globalAlpha=1; if(!still) requestAnimationFrame(fr);}
+  requestAnimationFrame(fr);
+})();
+/* Patinhas de fundo */
+$('#paws').innerHTML=Array.from({length:14},(_,i)=>`<span style="left:${(i*37)%100}%;top:${(i*53)%100}%;transform:rotate(${i*40}deg)">🐾</span>`).join('');
+$('#yr').textContent=new Date().getFullYear();
+
+show(location.hash.slice(1)||'inicio');
+</script>
+</body>
+</html>
